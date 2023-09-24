@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <!-- Include Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>User Information</h1>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">User Profile</h5>
+                <ul class="list-group">
+                    <li class="list-group-item"><strong>Name:</strong> <%= user.name %></li>
+                    <li class="list-group-item"><strong>Email:</strong> <%= user.email %></li>
+                    <!-- Add more user information fields as needed -->
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Include Bootstrap JS (optional) -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
