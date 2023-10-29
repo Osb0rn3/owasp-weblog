@@ -1,0 +1,37 @@
+<%- include('header', { title: 'Create New Post' }) %>
+
+<!-- New Post Form -->
+<section class="new-post-form" style="margin-top: 20px;">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+                <h2 class="text-center mb-4">Create New Post</h2>
+                <form style="display: flex; flex-direction: column;" action="/user/posts/create" method="post" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="postTitle" class="form-label">Post Title</label>
+                        <input type="text" class="form-control" id="postTitle" placeholder="Enter your post title here" name="title" required>
+                    </div>
+                    <div class="mb-3" style="position: relative;">
+                        <label for="postCover" class="form-label">Upload Cover</label>
+                        <input type="file" class="form-control" id="postCover" name="cover" accept="image/*">
+                    </div>
+                    <div class="mb-3" style="position: relative;">
+                        <label for="postContent" class="form-label">Post Content</label>
+                        <textarea class="form-control" id="postContent" name="content" style="height: 500px; resize: none; width: 100%;" placeholder="Write your post content here" required></textarea>
+                    </div>
+                    <div style="display: flex; justify-content: flex-end; margin-top: 10px;">
+                        <button type="submit" class="btn btn-primary">Publish Post</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<%- include('footer') %>
+
+<!-- Add Bootstrap JS CDN link and jQuery CDN link before closing </body> tag -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

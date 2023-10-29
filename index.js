@@ -15,6 +15,8 @@ app.use(express.urlencoded({ extended: true }));
 app.set('view engine', 'ejs')
 app.set('views', path.join(__dirname, 'views'))
 
+app.use(express.static(path.join(__dirname, 'statics')))
+
 app.use('/auth', authRoutes)
 app.use('/user', userRoutes)
 app.use('/', homeRoutes)
@@ -22,7 +24,9 @@ app.use('/', homeRoutes)
 app.listen(port, async () => {
     try {
         await sequelize.authenticate();
-        await sequelize.sync();
+        await sequelize.sync({
+            // force: true
+        });
         console.log('Connection has been established successfully.');
         console.log(`Example app listening on port ${port}`);
     } catch (error) {

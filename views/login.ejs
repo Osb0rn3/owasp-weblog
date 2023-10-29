@@ -1,46 +1,53 @@
-<!DOCTYPE html>
-<html lang="en">
+<%- include('header', {title: 'Login' }) %>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <!-- Include Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-</head>
-
-<body>
-    <div class="container mt-5">
-        <h1 class="text-center">Login</h1>
-
-        <% if (typeof errorMessage !=='undefined' ) { %>
-            <div class="alert alert-danger">
-                <%= errorMessage %>
-            </div>
-            <% } %>
-
-                <div class="row justify-content-center">
-                    <div class="col-md-6">
-                        <form action="/auth/login" method="POST">
-                            <div class="form-group">
-                                <label for="email">Email:</label>
-                                <input type="text" class="form-control" id="email" name="email" required>
+    <!-- Login Form -->
+    <section class="login-form d-flex align-items-center">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            Login
+                        </div>
+                        <% if (typeof errorMessage !=='undefined' ) { %>
+                            <div class="alert alert-danger">
+                                <%= errorMessage %>
                             </div>
-
-                            <div class="form-group">
-                                <label for="password">Password:</label>
-                                <input type="password" class="form-control" id="password" name="password" required>
-                            </div>
-
-                            <button type="submit" class="btn btn-primary btn-block">Login</button>
-                        </form>
+                            <% } %>
+                                <div class="card-body">
+                                    <form method="post" action="/auth/login">
+                                        <div class="mb-3">
+                                            <label for="email" class="form-label">Email</label>
+                                            <input type="text" class="form-control" id="email" name="email"
+                                                placeholder="Enter your email">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label"
+                                                style="display: flex; justify-content: space-between; align-items: center;">
+                                                <span>Password</span>
+                                                <a href="/auth/forget-password">Forgot Password?</a>
+                                            </label>
+                                            <input type="password" class="form-control" id="password" name="password"
+                                                placeholder="Enter your password">
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">Login</button>
+                                    </form>
+                                </div>
+                                <div class="card-footer">
+                                    Don't have an account yet? <a href="/auth/register">Sign Up</a>
+                                </div>
                     </div>
                 </div>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-        crossorigin="anonymous"></script>
-</body>
+            </div>
+        </div>
+    </section>
 
-</html>
+
+    <%- include('footer') %>
+
+    <!-- Bootstrap JS and jQuery CDN links (place before </body> tag) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap/dist/js/bootstrap.min.js"></script>
+    </body>
+
+    </html>

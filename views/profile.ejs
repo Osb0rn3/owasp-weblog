@@ -1,28 +1,312 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile</title>
-    <!-- Include Bootstrap CSS -->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
-    <div class="container mt-5">
-        <h1>User Information</h1>
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">User Profile</h5>
-                <ul class="list-group">
-                    <li class="list-group-item"><strong>Name:</strong> <%= user.name %></li>
-                    <li class="list-group-item"><strong>Email:</strong> <%= user.email %></li>
-                    <!-- Add more user information fields as needed -->
-                </ul>
+<%- include('header', {title: 'User Profile' }) %>
+
+    <body>
+        <div class="container centered-profile-card">
+            <div class="row flex-lg-nowrap">
+                <div class="col">
+                    <div class="row">
+                        <div class="col mb-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="e-profile">
+                                        <div class="row">
+                                            <div class="col-12 col-sm-auto mb-3">
+                                                <div class="mx-auto" style="width: 140px; height: 140px;">
+                                                    <div class="d-flex justify-content-center align-items-center rounded"
+                                                        style="height: 140px; width: 140px; overflow: hidden;">
+                                                        <% if (user.profile_image) { %>
+                                                            <img id="profile-picture" src="<%= user.profile_image %>"
+                                                                style="height: 100%; width: auto; object-fit: cover;"
+                                                                alt="Profile Picture">
+                                                            <% } else { %>
+                                                                <img id="profile-picture" src="/img/default.png"
+                                                                    style="height: 100%; width: auto; object-fit: cover;"
+                                                                    alt="Profile Picture">
+                                                                <% } %>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div
+                                                class="col d-flex flex-column flex-sm-row justify-content-between mb-3">
+                                                <div class="text-center text-sm-left mb-2 mb-sm-0">
+                                                    <h4 class="pt-sm-2 pb-1 mb-0 text-nowrap">
+                                                        <%= user.firstName %>
+                                                            <%= user.lastName %>
+                                                    </h4>
+                                                    <p class="mb-0">@<%= user.username %>
+                                                    </p>
+                                                    <div class="text-muted"><small>Last seen 2 hours ago</small></div>
+                                                    <div class="mt-2">
+                                                        <input type="file" id="profile-picture-input" accept="image/*"
+                                                            style="display: none;" />
+                                                        <button class="btn btn-primary profile-picture-btn"
+                                                            type="button">
+                                                            <i class="fa fa-fw fa-camera"></i>
+                                                            <span>Change Photo</span>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <div class="text-center text-sm-right">
+                                                    <div class="text-muted"><small>Joined <%= user.createdAt %></small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <ul class="nav nav-tabs">
+                                            <li class="nav-item">
+                                                <a href="#settings" id="settings-tab" data-toggle="tab"
+                                                    class="active nav-link">Settings</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="#change-password" id="change-password-tab" data-toggle="tab"
+                                                    class="nav-link">Change Password</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="#posts" id="posts-tab" data-toggle="tab"
+                                                    class="nav-link">Posts</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="/user/logout" data-toggle="tab" class="nav-link">Logout</a>
+                                            </li>
+                                        </ul>
+
+                                        <div class="tab-content pt-3">
+                                            <div class="tab-pane active" id="settings">
+                                                <form class="form" action="/user/profile" method="post">
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <div class="row">
+                                                                <div class="col">
+                                                                    <div class="form-group">
+                                                                        <label>Firstname</label>
+                                                                        <input class="form-control" type="text"
+                                                                            name="firstName"
+                                                                            placeholder="<%= user.firstName %>"
+                                                                            value="<%= user.firstName %>">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col">
+                                                                    <div class="form-group">
+                                                                        <label>Lastname</label>
+                                                                        <input class="form-control" type="text"
+                                                                            name="lastName"
+                                                                            placeholder="<%= user.lastName %>"
+                                                                            value="<%= user.lastName %>">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col">
+                                                                    <div class="form-group">
+                                                                        <label>Email</label>
+                                                                        <input class="form-control" type="text"
+                                                                            name="email" value="<%= user.email %>"
+                                                                            disabled>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col">
+                                                                    <div class="form-group">
+                                                                        <label>Username</label>
+                                                                        <input class="form-control" type="text"
+                                                                            name="username" value="<%= user.username %>"
+                                                                            disabled>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col mb-3">
+                                                                    <div class="form-group">
+                                                                        <label>About</label>
+                                                                        <textarea class="form-control" rows="5"
+                                                                            placeholder="My Bio"
+                                                                            name="bio"><%= user.bio %></textarea>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col d-flex justify-content-end">
+                                                            <button class="btn btn-primary" type="submit">Save
+                                                                Changes</button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+
+                                            <div class="tab-pane" id="change-password">
+                                                <form class="form" action="/user/profile" method="post">
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <div class="form-group">
+                                                                <label>Current Password</label>
+                                                                <input class="form-control" type="password"
+                                                                    name="current_password"
+                                                                    placeholder="Enter current password">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>New Password</label>
+                                                                <input class="form-control" type="password"
+                                                                    name="new_password"
+                                                                    placeholder="Enter new password">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Confirm New Password</label>
+                                                                <input class="form-control" type="password"
+                                                                    name="confirm_new_password"
+                                                                    placeholder="Confirm new password">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col d-flex justify-content-end">
+                                                            <button class="btn btn-primary" type="submit">Change
+                                                                Password</button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+
+                                            <div class="tab-pane" id="posts">
+                                                <table class="table" id="postsTable">
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col">ID</th>
+                                                            <th scope="col">Created At</th>
+                                                            <th scope="col">Title</th>
+                                                            <th scope="col">Actions</th>
+                                                            <th scope="col">
+                                                                <a href="/user/posts/create"
+                                                                    style="font-size: 20px; text-decoration: none; color: black; float: right;">➕</a>
+                                                            </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="postsTableBody">
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
+        <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $("#change-password-tab").click(function () {
+                    $("#settings-tab").removeClass("active");
+                    $("#change-password-tab").addClass("active");
+                    $("#posts-tab").removeClass("active");
+                    $("#settings").removeClass("active show");
+                    $("#change-password").addClass("active show");
+                    $("#posts").removeClass("active show");
+                });
 
-    <!-- Include Bootstrap JS (optional) -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
-</html>
+                $("#settings-tab").click(function () {
+                    $("#settings-tab").addClass("active");
+                    $("#change-password-tab").removeClass("active");
+                    $("#posts-tab").removeClass("active");
+                    $("#settings").addClass("active show");
+                    $("#change-password").removeClass("active show");
+                    $("#posts").removeClass("active show");
+                });
+
+                $("#posts-tab").click(function () {
+                    $("#settings-tab").removeClass("active");
+                    $("#change-password-tab").removeClass("active");
+                    $("#posts-tab").addClass("active");
+                    $("#settings").removeClass("active show");
+                    $("#change-password").removeClass("active show");
+                    $("#posts").addClass("active show");
+
+
+                    $(document).ready(function () {
+                        $.ajax({
+                            url: '/user/posts',
+                            type: 'GET',
+                            success: function (posts) {
+                                var tableBody = $('#postsTableBody');
+                                $.each(posts, function (index, post) {
+                                    var row = `<tr id="${post.id}">` +
+                                        '<td>' + post.id + '</td>' +
+                                        '<td>' + post.createdAt + '</td>' +
+                                        '<td>' + post.title + '</td>' +
+                                        `<td><a href="/user/posts/${post.id}"><button class="btn btn-primary">Edit</button></a><button class="btn btn-danger" onclick="deletePost(${post.id})">Delete</button></td>` +
+                                        '<td></td>' +
+                                        '</tr>';
+                                    tableBody.append(row);
+                                });
+                            },
+                            error: function (error) {
+                                console.log('Error:', error);
+                            }
+                        });
+                    });
+                });
+
+                // When the "Change Photo" button is clicked
+                $("button.profile-picture-btn").click(function () {
+                    // Trigger the file input dialog
+                    $("input[id='profile-picture-input']").trigger('click');
+                });
+
+                // When a file is chosen, handle the file upload
+                $("input[id='profile-picture-input']").change(function () {
+                    // render the preview
+                    var file = this.files[0];
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        var imagePreview = document.getElementById('profile-picture');
+                        imagePreview.src = e.target.result;
+                    }
+                    reader.readAsDataURL(file);
+
+                    // try to upload
+                    var formData = new FormData();
+                    formData.append('profile_image', file);
+
+                    $.ajax({
+                        url: '/user/profile', // Replace with your actual upload path
+                        type: 'POST',
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        success: function (data) {
+                            // Handle the successful upload here
+                            console.log("File uploaded successfully.");
+                        },
+                        error: function (error) {
+                            // Handle any errors that occur during the upload
+                            console.error("Error occurred during file upload.");
+                        }
+                    });
+                });
+            });
+
+            function deletePost(PostId) {
+                $.ajax({
+                        url: `/user/posts/${PostId}`, // Replace with your actual upload path
+                        type: 'DELETE',
+                        processData: false,
+                        contentType: false,
+                        success: function (data) {
+                            // Handle the successful upload here
+                            $("#" + PostId).remove();
+                        },
+                        error: function (error) {
+                            // Handle any errors that occur during the upload
+                            console.error("Error occurred during file upload.");
+                        }
+                    });
+            }
+
+
+        </script>
+    </body>
+
+    </html>

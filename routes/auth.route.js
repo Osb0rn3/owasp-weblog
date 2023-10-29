@@ -37,6 +37,7 @@ router.get('/forget-password/:token', (req, res) => {
 
 router.post('/login', async (req, res) => {
     const { email, password } = req.body
+
     const secretKey = 'your_secret_key';
 
     const user = await User.findOne({
@@ -70,7 +71,7 @@ router.post('/login', async (req, res) => {
 })
 
 router.post('/register', async (req, res) => {
-    const { email, password, firstname, lastname } = req.body
+    const { email, password, firstname, lastname, username } = req.body
 
     const user = await User.findOne({
         where: {
@@ -85,7 +86,8 @@ router.post('/register', async (req, res) => {
             lastName: lastname,
             firstName: firstname,
             password,
-            email
+            email,
+            username
         })
 
         res.redirect('/auth/login')

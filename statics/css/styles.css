@@ -1,0 +1,52 @@
+header.hero {
+    margin-top: 30px;
+    /* You can adjust this value as needed */
+    /* OR */
+    /* padding-top: 40px; */
+}
+
+.login-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 90vh;
+}
+
+.register-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 90vh;
+}
+
+.reset-password-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 90vh;
+}
+
+.single-post {
+    margin-top: 30px;
+}
+
+a {
+    text-decoration: none;
+}
+
+.custom-background {
+    height: 140px;
+    background-color: rgb(233, 236, 239);
+}
+
+.custom-image {
+    height: 140px;
+    background-color: rgb(233, 236, 239);
+}
+
+.centered-profile-card {
+    position: fixed;
+     top: 50%;
+     left: 50%;
+     transform: translate(-50%, -50%);
+}
