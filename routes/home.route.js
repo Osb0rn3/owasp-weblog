@@ -24,7 +24,7 @@ router.get('/', async (req, res) => {
                 id: item.id,
                 title: item.title,
                 cover: item.cover,
-                content: item.content.substring(0, 100) // Create a new 'brief' field with a limited length
+                content: `${item.content.substring(0, 100)} ...` // Create a new 'brief' field with a limited length
             };
         })
     })

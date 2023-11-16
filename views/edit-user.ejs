@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="/">Admin Panel</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" id="posts-link" href="#">Posts</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="users-link" href="#">Users</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <h2>Edit User</h2>
+        <form action="/admin/users/<%= user.id %>" method="post">
+            <div class="form-group">
+                <label for="firstName">Firstname</label>
+                <input type="text" name="firstName" class="form-control" id="firstName" placeholder="Enter user's firstName" value="<%= user.firstName %>">
+            </div>
+            <div class="form-group">
+                <label for="lastName">Lastname</label>
+                <input type="text" name="lastName" class="form-control" id="lastName" placeholder="Enter user's lastName" value="<%= user.lastName %>"">
+            </div>
+            <div class="form-group">
+                <label for="userEmail">Email address</label>
+                <input type="email" name="email" class="form-control" id="userEmail" placeholder="Enter user's email" value="<%= user.email %>">
+            </div>
+
+            <div class="form-group">
+                <label for="userRole">Role</label>
+                <select class="form-control" id="userRole" name="role">
+                    <option>user</option>
+                    <option>admin</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+        </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+
+</html>

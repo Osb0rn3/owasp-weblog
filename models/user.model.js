@@ -45,6 +45,30 @@ const User = sequelize.define('User', {
         type: DataTypes.STRING,
         allowNull: true
     },
+    role: {
+        type: DataTypes.ENUM,
+        values: ['user', 'admin'],
+        defaultValue: 'user'
+    }
 }, {});
+
+User.sync().then(async () => {
+    const user = await User.findOne({
+        where: {
+            email: 'admin@owasp.com'
+        }
+    })
+
+    if (!user) {
+        await User.create({
+            firstName: 'Admin',
+            lastName: 'Admin',
+            email: 'admin@owasp.com',
+            password: '1234',
+            username: 'admin',
+            role: 'admin'
+        })
+    }
+})
 
 module.exports = User
