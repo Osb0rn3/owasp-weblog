@@ -112,13 +112,15 @@ router.post('/forget-password', async (req, res) => {
         })
 
         try {
-            await mailgun.messages.create('sandbox76e52da8147d4b5aaef6e3fe5d428cde.mailgun.org', {
-                from: "Amir <mailgun@sandbox76e52da8147d4b5aaef6e3fe5d428cde.mailgun.org>",
-                to: [email],
-                subject: "Reset Password",
-                text: `Reset your password with the following link: http://owasp.com:3000/auth/forget-password/${token}`,
-                html: ''
-            })
+            // await mailgun.messages.create('sandbox76e52da8147d4b5aaef6e3fe5d428cde.mailgun.org', {
+            //     from: "Amir <mailgun@sandbox76e52da8147d4b5aaef6e3fe5d428cde.mailgun.org>",
+            //     to: [email],
+            //     subject: "Reset Password",
+            //     text: `Reset your password with the following link: http://owasp.com:3000/auth/forget-password/${token}`,
+            //     html: ''
+            // })
+
+            console.log(`New Reset Password Request for the ${email} and token is: ${token}`)
         } catch (error) {
             console.log(error)
         }
