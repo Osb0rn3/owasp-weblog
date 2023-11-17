@@ -49,6 +49,8 @@ router.post('/profile', requireAuth, upload.single('profile_image'), async (req,
                 }
             }
         )
+
+        res.redirect('/user/profile')
     } else if (current_password && new_password && confirm_new_password) {
         const user = await User.findOne({
             where: {
