@@ -1,0 +1,31 @@
+<%- include('header', { title: post.title }) %>
+
+
+<body>
+
+    <!-- Single Post Section -->
+    <section class="single-post">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+                    <div class="card mb-4">
+                        <img src="/user_files/<%= post.cover %>" class="card-img-top" alt="Blog Post <%= post.id %>">
+                        <div class="card-body">
+                            <h2 class="card-title"><%= post.title %></h2>
+                            <p class="card-text"><%= post.content %></p>
+                            <!-- Add any other details you want to display, e.g., author, date, etc. -->
+                            <p class="card-text"><small class="text-muted">Published on <%= post.date %></small></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Add Bootstrap JS CDN link and jQuery CDN link before closing </body> tag -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap/dist/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

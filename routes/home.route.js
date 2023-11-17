@@ -30,4 +30,18 @@ router.get('/', async (req, res) => {
     })
 })
 
+router.get('/post/:post_id', async (req, res) => {
+    const post = await Post.findOne({
+        where: {
+            id: req.params.post_id
+        }
+    })
+
+    if (post) {
+        res.render('single_post', { post })
+    } else {
+        res.redirect('/')
+    }
+})
+
 module.exports = router
