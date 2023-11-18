@@ -80,16 +80,20 @@ router.post('/profile', requireAuth, upload.single('profile_image'), async (req,
         }
 
     } else {
-        await User.update(
-            req.body,
-            {
-                where: {
-                    email: res.locals.decoded.email
+        try {
+            await User.update(
+                req.body,
+                {
+                    where: {
+                        email: res.locals.decoded.email
+                    }
                 }
-            }
-        )
+            )
 
-        res.redirect('/user/profile')
+            res.redirect('/user/profile')
+        } catch(e) {
+            res.status(500).send({error: true, message: 'There was a problem to update the user!'})
+        }
     }
 })
 
