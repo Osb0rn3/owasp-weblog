@@ -92,6 +92,7 @@ router.post('/profile', requireAuth, upload.single('profile_image'), async (req,
 
             res.redirect('/user/profile')
         } catch(e) {
+            console.log(e)
             res.status(500).send({error: true, message: 'There was a problem to update the user!'})
         }
     }
